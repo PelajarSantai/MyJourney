@@ -1,11 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Cek Tipe Data TypeScript Aman</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      
+      {/* bagian header */}
+      <View>
+        <Text>MyJourney ✈️</Text>
+        <Text>Rekam jejak petualanganmu</Text>
+      </View>
+
+      {/* area konten */}
+      <View style={styles.content}>
+        <Text>List akan muncul disini</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -13,11 +24,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  text: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
