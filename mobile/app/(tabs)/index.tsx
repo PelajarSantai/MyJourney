@@ -57,8 +57,14 @@ export default function HomeScreen() {
     <View style={styles.card}>
       <View style={styles.headerCard}>
         <Text style={styles.title}>{item.title}</Text>
-        {/* sementara pakai raw string tanggal untuk cek konsistensi data */}
-        <Text style={styles.date}>{item.visitedAt}</Text>
+        {/* tanggal ditampilkan dalam format lokal (id-ID) agar lebih mudah dibaca */}
+        <Text style={styles.date}>
+          {new Date(item.visitedAt).toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}
+        </Text>
       </View>
 
       <Text style={styles.description}>
@@ -90,6 +96,14 @@ export default function HomeScreen() {
           contentContainerStyle={styles.listContent}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          // Menampilkan pesan informatif jika belum ada data riwayat
+          ListEmptyComponent={
+            <View style={styles.center}>
+              <Text style={{ color: "#888", fontStyle: "italic" }}>
+                Belum ada riwayat perjalanan.
+              </Text>
+            </View>
           }
         />
       )}

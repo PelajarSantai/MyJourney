@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Lokasi: api/prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -10,16 +6,31 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  // Pastikan URL database di file .env Anda sudah benar
   url      = env("DATABASE_URL")
 }
 
+// Model Utama: Mencatat detail perjalanan
 model TravelLog {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String?
-  imageUrl    String?
-  latitude    Float
-  longitude   Float
-  visitedAt   DateTime @default(now())
-  createdAt   DateTime @default(now())
+  id          Int           @id @default(autoincrement())
+  title       String        // Judul Catatan
+  description String?       // Deskripsi (boleh kosong)
+  latitude    Float         // Koordinat GPS
+  longitude   Float         // Koordinat GPS
+  visitedAt   DateTime      @default(now()) // Kapan dikunjungi
+  createdAt   DateTime      @default(now()) // Kapan dicatat
+  
+  // Relasi: Satu catatan bisa punya banyak foto
+  photos      TravelPhoto[] 
+}
+
+// Model Foto: Menyimpan link gambar
+model TravelPhoto {
+  id          Int       @id @default(autoincrement())
+  url         String    // Path/URL file gambar
+  travelLogId Int
+  
+  // Menghubungkan foto ke TravelLog
+  // onDelete: Cascade berarti jika Catatan dihapus, fotonya juga terhapus dari DB
+  travelLog   TravelLog @relation(fields: [travelLogId], references: [id], onDelete: Cascade)
 }
