@@ -27,6 +27,10 @@ export default function CreateLogScreen() {
     });
 
     console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
   };
 
   return (
