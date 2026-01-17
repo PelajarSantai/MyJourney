@@ -27,6 +27,10 @@ export default function CreateLogScreen() {
         textAlignVertical="top"
       />
 
+      <TouchableOpacity style={styles.secondaryButton} onPress={() => alert('Buka Kamera')}>
+        <Text style={styles.secondaryButtonText}>📸 Ambil Foto</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.button} onPress={() => alert('Simpan!')}>
         <Text style={styles.buttonText}>Simpan Catatan</Text>
       </TouchableOpacity>
@@ -73,6 +77,21 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  secondaryButton: {
+    backgroundColor: '#e1f0ff',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#007AFF',
+  },
+  secondaryButtonText: {
+    color: '#007AFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
