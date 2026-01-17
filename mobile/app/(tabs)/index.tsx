@@ -23,6 +23,28 @@ interface TravelLog {
   visitedAt: string;
 }
 
+// Data Dummy untuk testing UI
+const DUMMY_DATA: TravelLog[] = [
+  {
+    id: 1,
+    title: "Liburan ke Bali 🌴",
+    description: "Seru banget main di pantai Kuta dan makan ayam betutu!",
+    visitedAt: "2023-12-25T10:00:00.000Z",
+  },
+  {
+    id: 2,
+    title: "Hiking Gunung Gede 🏔️",
+    description: "Capek tapi pemandangannya worth it parah, sunrise-nya juara!",
+    visitedAt: "2024-01-01T05:30:00.000Z",
+  },
+  {
+    id: 3,
+    title: "Kulineran di Bandung 🍜",
+    description: "Cuanki, Batagor, Seblak... kenyang banget!",
+    visitedAt: "2024-01-15T12:00:00.000Z",
+  },
+];
+
 export default function HomeScreen() {
   // State utama untuk data logs dan status UI
   const [logs, setLogs] = useState<TravelLog[]>([]);
