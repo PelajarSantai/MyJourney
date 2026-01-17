@@ -57,7 +57,12 @@ export default function CreateLogScreen() {
   };
 
   const handleSubmit = async () => {
-    console.log("Tombol simpan ditekan!");
+    if (!title || !description || !image || !location) {
+      alert("Harap lengkapi semua data (Judul, Deskripsi, Foto, Lokasi)!");
+      return;
+    }
+
+    setLoading(true);
     // Nanti logika kirim data di sini
   };
 
