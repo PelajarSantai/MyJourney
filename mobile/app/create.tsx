@@ -6,6 +6,12 @@ export default function CreateLogScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<string | null>(null);
+
+  const pickImage = async () => {
+    // Nanti logika kamera di sini
+    console.log("Tombol kamera ditekan!");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
@@ -29,7 +35,7 @@ export default function CreateLogScreen() {
         textAlignVertical="top"
       />
 
-      <TouchableOpacity style={styles.secondaryButton} onPress={() => alert('Buka Kamera')}>
+      <TouchableOpacity style={styles.secondaryButton} onPress={pickImage}>
         <Text style={styles.secondaryButtonText}>📸 Ambil Foto</Text>
       </TouchableOpacity>
 
