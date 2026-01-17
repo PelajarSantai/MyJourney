@@ -82,8 +82,15 @@ export default function CreateLogScreen() {
         type: 'image/jpeg',
       });
 
-      // Nanti kirim ke axios di sini
-      console.log("Data siap dikirim!");
+      // 2. Kirim ke API
+      await axios.post(API_URL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log("Data berhasil dikirim!");
+      // Nanti redirect di sini
 
     } catch (error) {
       console.error(error);
