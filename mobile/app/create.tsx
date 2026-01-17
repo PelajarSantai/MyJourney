@@ -126,7 +126,7 @@ export default function CreateLogScreen() {
       setLocation(location);
       console.log(location);
     } catch (error) {
-      console.error("Gagal ambil lokasi:", error);
+      console.warn("Gagal ambil lokasi asli (menggunakan fallback):", error);
       // alert("Gagal ambil lokasi asli. Menggunakan lokasi dummy (Jakarta) untuk testing! 📍");
       alert("✅ Lokasi Testing Aktif: Jakarta Pusat (Fallback Mode)");
 
