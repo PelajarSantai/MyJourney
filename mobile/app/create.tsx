@@ -45,6 +45,11 @@ export default function CreateLogScreen() {
     }
 
     console.log("Izin lokasi aman!");
+
+    // 2. Ambil Koordinat
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+    console.log(location);
   };
 
   return (
