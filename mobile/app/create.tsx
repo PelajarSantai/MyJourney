@@ -78,6 +78,12 @@ export default function CreateLogScreen() {
       <TouchableOpacity style={styles.secondaryButton} onPress={getLocation}>
         <Text style={styles.secondaryButtonText}>📍 Ambil Lokasi</Text>
       </TouchableOpacity>
+      
+      {location && (
+        <Text style={styles.locationText}>
+          Koordinat: {location.coords.latitude}, {location.coords.longitude}
+        </Text>
+      )}
 
       <TouchableOpacity style={styles.secondaryButton} onPress={pickImage}>
         <Text style={styles.secondaryButtonText}>📸 Ambil Foto</Text>
@@ -155,5 +161,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     resizeMode: 'cover',
+  },
+  locationText: {
+    marginBottom: 10,
+    color: '#666',
+    textAlign: 'center',
   },
 });
