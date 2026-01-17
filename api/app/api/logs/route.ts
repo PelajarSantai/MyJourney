@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../lib/prisma";
+import { prisma } from "../../../lib/prisma";
 import { writeFile } from "fs/promises";
 import path from "path";
 
@@ -10,7 +10,12 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
       include: { photos: true }
     });
-    return NextResponse.json(logs);
+    return NextResponse.json(logs, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
   }
@@ -67,7 +72,12 @@ export async function POST(request: Request) {
       include: { photos: true }
     });
 
-    return NextResponse.json({ message: "Berhasil disimpan", data: newLog }, { status: 201 });
+    return NextResponse.json({ message: "Berhasil disimpan", data: newLog }, {
+      status: 201,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      }
+    });
 
   } catch (error) {
     console.error(error); // Tampilkan error di terminal server jika ada
