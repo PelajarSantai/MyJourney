@@ -204,6 +204,7 @@ export default function CreateLogScreen() {
           onChangeText={setTitle}
           autoCapitalize="sentences"
           maxLength={50}
+          keyboardType="default"
         />
       </View>
 
@@ -219,6 +220,7 @@ export default function CreateLogScreen() {
           multiline
           numberOfLines={4}
           autoCapitalize="sentences"
+          keyboardType="default"
         />
       </View>
 
