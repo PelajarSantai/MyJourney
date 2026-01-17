@@ -60,6 +60,8 @@ export default function CreateLogScreen() {
         <Text style={styles.secondaryButtonText}>📸 Ambil Foto</Text>
       </TouchableOpacity>
 
+      {image && <Image source={{ uri: image }} style={styles.imagePreview} />}
+
       <TouchableOpacity style={styles.button} onPress={() => alert('Simpan!')}>
         <Text style={styles.buttonText}>Simpan Catatan</Text>
       </TouchableOpacity>
@@ -123,5 +125,12 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  imagePreview: {
+    width: '100%',
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 20,
+    resizeMode: 'cover',
   },
 });
