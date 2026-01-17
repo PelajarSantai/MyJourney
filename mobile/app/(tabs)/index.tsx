@@ -28,6 +28,7 @@ export default function HomeScreen() {
   const [logs, setLogs] = useState<TravelLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const router = useRouter();
 
   // Endpoint backend (khusus emulator Android)
   const API_URL = "http://10.0.2.2:3000/api/logs";
@@ -102,6 +103,16 @@ export default function HomeScreen() {
           }
         />
       )}
+        />
+      )}
+
+      {/* Tombol Melayang (FAB) buat nambah catatan */}
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => router.push("/create")}
+      >
+        <Ionicons name="add" size={30} color="#fff" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
