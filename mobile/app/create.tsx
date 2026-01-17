@@ -107,20 +107,28 @@ export default function CreateLogScreen() {
    * Membutuhkan izin foreground location.
    */
   const getLocation = async () => {
-    // 1. Minta Izin Lokasi
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    
-    if (status !== 'granted') {
-      alert(MESSAGES.system.locationPermission);
-      return;
+    try {
+      // 1. Minta Izin Lokasi
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status !== 'granted') {
+        alert(MESSAGES.system.locationPermission);
+        return;
+      }
+
+      console.log("Izin lokasi aman!");
+
+      // 2. Ambil Koordinat
+      // Menggunakan accuracy balanced biar lebih cepat di emulator
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+      setLocation(location);
+      console.log(location);
+    } catch (error) {
+      console.error("Gagal ambil lokasi:", error);
+      alert("Gagal mengambil lokasi. Pastikan GPS aktif! 📍");
     }
-
-    console.log("Izin lokasi aman!");
-
-    // 2. Ambil Koordinat
-    let location = await Location.getCurrentPositionAsync({});
-    setLocation(location);
-    console.log(location);
   };
 
   /**
