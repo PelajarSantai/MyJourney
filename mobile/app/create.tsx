@@ -51,6 +51,10 @@ export default function CreateLogScreen() {
     }
   };
 
+  /**
+   * Mengambil koordinat GPS saat ini menggunakan Expo Location.
+   * Membutuhkan izin foreground location.
+   */
   const getLocation = async () => {
     // 1. Minta Izin Lokasi
     let { status } = await Location.requestForegroundPermissionsAsync();
