@@ -11,16 +11,24 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import TravelCard from "../../components/TravelCard";
 
 // Struktur data mengikuti payload API logs saat ini
+interface TravelPhoto {
+  id: number;
+  url: string;
+}
+
 interface TravelLog {
   id: number;
   title: string;
   description: string | null;
   visitedAt: string;
+  photos?: TravelPhoto[];
+  latitude: number;
+  longitude: number;
 }
 
 // Data Dummy untuk testing UI
@@ -30,18 +38,24 @@ const DUMMY_DATA: TravelLog[] = [
     title: "Liburan ke Bali 🌴",
     description: "Seru banget main di pantai Kuta dan makan ayam betutu!",
     visitedAt: "2023-12-25T10:00:00.000Z",
+    latitude: -8.723796,
+    longitude: 115.17677,
   },
   {
     id: 2,
     title: "Hiking Gunung Gede 🏔️",
     description: "Capek tapi pemandangannya worth it parah, sunrise-nya juara!",
     visitedAt: "2024-01-01T05:30:00.000Z",
+    latitude: -6.790554,
+    longitude: 106.980658,
   },
   {
     id: 3,
     title: "Kulineran di Bandung 🍜",
     description: "Cuanki, Batagor, Seblak... kenyang banget!",
     visitedAt: "2024-01-15T12:00:00.000Z",
+    latitude: -6.917464,
+    longitude: 107.619123,
   },
 ];
 
@@ -77,10 +91,12 @@ export default function HomeScreen() {
     }
   };
 
-  // fetch pertama kali saat screen dirender
-  useEffect(() => {
-    fetchLogs();
-  }, []);
+  // Auto refresh saat layar fokus (kembali dari create)
+  useFocusEffect(
+    useCallback(() => {
+      fetchLogs();
+    }, [])
+  );
 
   // handler refresh dari gesture pull-down
   const onRefresh = useCallback(() => {
@@ -118,6 +134,13 @@ export default function HomeScreen() {
                 month: "short",
                 year: "numeric",
               })}
+              images={
+                item.photos && item.photos.length > 0
+                  ? item.photos.map(p => `http://10.0.2.2:3000${p.url}`)
+                  : undefined
+              }
+              latitude={item.latitude}
+              longitude={item.longitude}
             />
           )}
           contentContainerStyle={styles.listContent}
@@ -138,7 +161,7 @@ export default function HomeScreen() {
       {/* Tombol Melayang (FAB) buat nambah catatan */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => router.push("/create")}
+        onPress={() => router.push("/modal")}
       >
         <Ionicons name="add" size={30} color="#fff" />
       </TouchableOpacity>
