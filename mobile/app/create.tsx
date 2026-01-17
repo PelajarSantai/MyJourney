@@ -81,8 +81,9 @@ export default function CreateLogScreen() {
    * Menggunakan FormData untuk support upload file.
    */
   const handleSubmit = async () => {
-    if (!title || !description || !image || !location) {
-      alert("Harap lengkapi semua data (Judul, Deskripsi, Foto, Lokasi)!");
+    // Validasi Judul
+    if (!title) {
+      alert("Mohon isi judul catatanmu dulu ya! 📝");
       return;
     }
 
