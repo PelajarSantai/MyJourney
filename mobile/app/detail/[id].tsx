@@ -1,88 +1,84 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    SafeAreaView,
-    StatusBar,
-    Image,
-    ScrollView,
-    TouchableOpacity,
-    Alert,
-    Dimensions,
-} from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
-import axios from "axios";
+    View, Text, StyleSheet, ActivityIndicator, Image, ScrollView, TouchableOpacity, SafeAreaView, StatusBar
+} from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
+
+interface TravelLog {
+    id: number;
+    title: string;
+    description: string | null;
+    visitedAt: string;
+    latitude: number;
+    longitude: number;
+    photos: { url: string }[];
+}
 
 export default function DetailScreen() {
-    const router = useRouter();
     const params = useLocalSearchParams();
+    const router = useRouter();
+    const { id } = params;
 
-    // Parsing params safely
-    const { id, title, description, visitedAt, latitude, longitude, imageUrl } = params;
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<TravelLog | null>(null);
+    const API_URL = `http://10.0.2.2:3000/api/logs/${id}`;
 
-    const [deleting, setDeleting] = useState(false);
+    useEffect(() => {
+        if (!id) return;
+        fetchDetail();
+    }, [id]);
 
-    const API_URL = "http://10.0.2.2:3000/api/logs";
+    const fetchDetail = async () => {
+        try {
+            const response = await axios.get(API_URL);
+            setData(response.data);
+        } catch (error) {
+            console.error("Gagal ambil detail:", error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
-    const handleDelete = () => {
-        Alert.alert(
-            "Hapus Catatan",
-            "Yakin ingin menghapus kenangan ini? 🥺",
-            [
-                { text: "Batal", style: "cancel" },
-                {
-                    text: "Hapus",
-                    style: "destructive",
-                    onPress: async () => {
-                        try {
-                            setDeleting(true);
-                            // Call API Delete
-                            // await axios.delete(`${API_URL}/${id}`);
-
-                            // For now, since we might be using dummy data or local state is not synced globally yet,
-                            // just simulate success and go back.
-                            // In real app using the API:
-                            await axios.delete(`${API_URL}/${id}`);
-
-                            Alert.alert("Berhasil", "Catatan berhasil dihapus", [
-                                { text: "OK", onPress: () => router.back() }
-                            ]);
-                        } catch (error) {
-                            console.error("Gagal hapus:", error);
-                            Alert.alert("Error", "Gagal menghapus data");
-                        } finally {
-                            setDeleting(false);
-                        }
-                    },
-                },
-            ]
+    if (loading) {
+        return (
+            <View style={styles.center}>
+                <ActivityIndicator size="large" color="#007AFF" />
+            </View>
         );
-    };
+    }
 
-    const savedLat = parseFloat(latitude as string) || 0;
-    const savedLong = parseFloat(longitude as string) || 0;
-    const hasLocation = savedLat !== 0 && savedLong !== 0;
+    if (!data) {
+        return (
+            <View style={styles.center}>
+                <Text>Data tidak ditemukan :(</Text>
+            </View>
+        );
+    }
+
+    // Ambil foto pertama jika ada
+    const imageUrl = data.photos && data.photos.length > 0
+        ? `http://10.0.2.2:3000${data.photos[0].url}`
+        : null;
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="dark-content" />
 
-            {/* Header with Back Button */}
+            {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={24} color="#333" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle} numberOfLines={1}>{title}</Text>
+                <Text style={styles.headerTitle} numberOfLines={1}>Detail Perjalanan</Text>
                 <View style={{ width: 24 }} />
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContent}>
-                {/* Full Image */}
+                {/* Foto Utama */}
                 {imageUrl ? (
-                    <Image source={{ uri: imageUrl as string }} style={styles.image} />
+                    <Image source={{ uri: imageUrl }} style={styles.image} />
                 ) : (
                     <View style={styles.placeholderImage}>
                         <Ionicons name="image-outline" size={50} color="#ccc" />
@@ -90,64 +86,19 @@ export default function DetailScreen() {
                     </View>
                 )}
 
-                {/* Content */}
+                {/* Konten Text */}
                 <View style={styles.contentContainer}>
                     <Text style={styles.date}>
-                        {new Date(visitedAt as string).toLocaleDateString("id-ID", {
-                            weekday: "long",
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
+                        {new Date(data.visitedAt).toLocaleDateString("id-ID", {
+                            weekday: "long", day: "numeric", month: "long", year: "numeric",
                         })}
                     </Text>
 
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}>{data.title}</Text>
 
                     <Text style={styles.description}>
-                        {description ? description : "Tidak ada deskripsi"}
+                        {data.description ? data.description : "Tidak ada deskripsi"}
                     </Text>
-
-                    {/* Map Section */}
-                    {hasLocation && (
-                        <View style={styles.mapContainer}>
-                            <Text style={styles.sectionTitle}>Lokasi 📍</Text>
-                            <View style={styles.mapWrapper}>
-                                <MapView
-                                    provider={PROVIDER_DEFAULT}
-                                    style={styles.map}
-                                    initialRegion={{
-                                        latitude: savedLat,
-                                        longitude: savedLong,
-                                        latitudeDelta: 0.01,
-                                        longitudeDelta: 0.01,
-                                    }}
-                                    scrollEnabled={false} // Disable scroll for simple view
-                                    zoomEnabled={false}
-                                >
-                                    <Marker
-                                        coordinate={{ latitude: savedLat, longitude: savedLong }}
-                                        title={title as string}
-                                    />
-                                </MapView>
-                            </View>
-                        </View>
-                    )}
-
-                    {/* Delete Button */}
-                    <TouchableOpacity
-                        style={[styles.deleteButton, deleting && styles.disabledButton]}
-                        onPress={handleDelete}
-                        disabled={deleting}
-                    >
-                        {deleting ? (
-                            <Text style={styles.deleteText}>Menghapus...</Text>
-                        ) : (
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Ionicons name="trash-outline" size={20} color="#fff" style={{ marginRight: 8 }} />
-                                <Text style={styles.deleteText}>Hapus Catatan</Text>
-                            </View>
-                        )}
-                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -157,7 +108,12 @@ export default function DetailScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
+    },
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     header: {
         flexDirection: "row",
@@ -175,8 +131,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         color: "#333",
-        flex: 1,
-        textAlign: "center",
     },
     scrollContent: {
         paddingBottom: 40,
@@ -212,41 +166,5 @@ const styles = StyleSheet.create({
         color: "#444",
         lineHeight: 24,
         marginBottom: 24,
-    },
-    mapContainer: {
-        marginTop: 10,
-        marginBottom: 24,
-    },
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: "600",
-        marginBottom: 12,
-        color: "#333",
-    },
-    mapWrapper: {
-        borderRadius: 16,
-        overflow: "hidden",
-        borderWidth: 1,
-        borderColor: "#eee",
-    },
-    map: {
-        width: "100%",
-        height: 200,
-    },
-    deleteButton: {
-        backgroundColor: "#FF3B30",
-        paddingVertical: 14,
-        borderRadius: 12,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 10,
-    },
-    disabledButton: {
-        opacity: 0.7,
-    },
-    deleteText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "bold",
     },
 });
