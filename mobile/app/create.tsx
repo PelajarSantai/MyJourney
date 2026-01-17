@@ -90,8 +90,10 @@ export default function CreateLogScreen() {
       });
 
       console.log("Data berhasil dikirim!");
-      // Nanti redirect di sini
-
+      
+      alert("Catatan berhasil disimpan! 🎉");
+      router.back(); // Kembali ke home
+      
     } catch (error) {
       console.error(error);
       alert("Gagal menyimpan data!");
