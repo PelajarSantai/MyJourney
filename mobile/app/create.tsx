@@ -93,6 +93,12 @@ export default function CreateLogScreen() {
       return;
     }
 
+    // Validasi Foto
+    if (!image) {
+      alert("Wajib upload foto kenangan ya! 📸");
+      return;
+    }
+
     setLoading(true);
 
     try {
