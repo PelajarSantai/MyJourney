@@ -203,6 +203,7 @@ export default function CreateLogScreen() {
           value={title}
           onChangeText={setTitle}
           autoCapitalize="sentences"
+          maxLength={50}
         />
       </View>
 
