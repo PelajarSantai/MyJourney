@@ -5,6 +5,22 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
 
+// IP Emulator Android (Ganti kalau pakai HP fisik)
+const API_URL = "http://10.0.2.2:3000/api/logs";
+
+// Warna Tema (Supaya konsisten)
+const COLORS = {
+  primary: '#007AFF',
+  secondary: '#e1f0ff',
+  background: '#fff',
+  text: '#333',
+  textSecondary: '#666',
+  border: '#ddd',
+  inputBg: '#f9f9f9',
+  white: '#fff',
+  black: '#000',
+};
+
 export default function CreateLogScreen() {
   // Tipe data custom
   type LocationState = Location.LocationObject | null;
@@ -22,21 +38,7 @@ export default function CreateLogScreen() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // IP Emulator Android (Ganti kalau pakai HP fisik)
-  const API_URL = "http://10.0.2.2:3000/api/logs";
-
-  // Warna Tema (Supaya konsisten)
-  const COLORS = {
-    primary: '#007AFF',
-    secondary: '#e1f0ff',
-    background: '#fff',
-    text: '#333',
-    textSecondary: '#666',
-    border: '#ddd',
-    inputBg: '#f9f9f9',
-    white: '#fff',
-    black: '#000',
-  };
+  // State untuk menyimpan input form
 
   /**
    * Membuka kamera menggunakan Expo ImagePicker.
@@ -209,14 +211,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.background,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 40,
-    color: '#333',
+    color: COLORS.text,
   },
   label: {
     fontSize: 16,
