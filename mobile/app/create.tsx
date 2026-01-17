@@ -56,6 +56,11 @@ export default function CreateLogScreen() {
     console.log(location);
   };
 
+  const handleSubmit = async () => {
+    console.log("Tombol simpan ditekan!");
+    // Nanti logika kirim data di sini
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
@@ -95,8 +100,12 @@ export default function CreateLogScreen() {
 
       {image && <Image source={{ uri: image }} style={styles.imagePreview} />}
 
-      <TouchableOpacity style={styles.button} onPress={() => alert('Simpan!')}>
-        <Text style={styles.buttonText}>Simpan Catatan</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Simpan Catatan</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
