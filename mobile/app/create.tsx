@@ -35,6 +35,11 @@ export default function CreateLogScreen() {
     }
   };
 
+  const getLocation = async () => {
+    // Nanti logika GPS di sini
+    console.log("Tombol lokasi ditekan!");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
@@ -58,7 +63,7 @@ export default function CreateLogScreen() {
         textAlignVertical="top"
       />
 
-      <TouchableOpacity style={styles.secondaryButton} onPress={() => alert("Ambil Lokasi")}>
+      <TouchableOpacity style={styles.secondaryButton} onPress={getLocation}>
         <Text style={styles.secondaryButtonText}>📍 Ambil Lokasi</Text>
       </TouchableOpacity>
 
