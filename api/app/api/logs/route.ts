@@ -17,6 +17,7 @@ export async function GET() {
       },
     });
   } catch (error) {
+    console.error("Database Error:", error);
     return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
   }
 }
