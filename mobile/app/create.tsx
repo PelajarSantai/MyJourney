@@ -6,10 +6,15 @@ import axios from 'axios';
 import { useRouter } from 'expo-router';
 
 export default function CreateLogScreen() {
+  // State untuk menyimpan input form
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  
+  // State untuk data multimedia (foto & lokasi)
   const [image, setImage] = useState<string | null>(null);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  
+  // State UI
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
