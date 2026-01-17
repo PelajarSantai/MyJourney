@@ -12,10 +12,14 @@ export default function TravelCard({ title, date, description, imageUrl }: Trave
   return (
     <View style={styles.card}>
       {/* Jika ada gambar, tampilkan (sementara placeholder dulu kalo null) */}
-      <View style={styles.imagePlaceholder}>
-        <Text style={{ color: "#aaa" }}>No Image</Text>
-      </View>
-      
+      {imageUrl ? (
+        <Image source={{ uri: imageUrl }} style={styles.image} />
+      ) : (
+        <View style={styles.imagePlaceholder}>
+          <Text style={{ color: "#aaa" }}>No Image</Text>
+        </View>
+      )}
+
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.title}>{title}</Text>
@@ -46,6 +50,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f0f0",
     justifyContent: "center",
     alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: 150,
+    resizeMode: "cover",
   },
   content: {
     padding: 16,

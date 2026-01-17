@@ -21,6 +21,9 @@ interface TravelLog {
   title: string;
   description: string | null;
   visitedAt: string;
+  latitude?: number;
+  longitude?: number;
+  imageUrl?: string;
 }
 
 // Data Dummy untuk testing UI
@@ -30,18 +33,27 @@ const DUMMY_DATA: TravelLog[] = [
     title: "Liburan ke Bali 🌴",
     description: "Seru banget main di pantai Kuta dan makan ayam betutu!",
     visitedAt: "2023-12-25T10:00:00.000Z",
+    latitude: -8.7185,
+    longitude: 115.1686,
+    imageUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1038&auto=format&fit=crop",
   },
   {
     id: 2,
     title: "Hiking Gunung Gede 🏔️",
     description: "Capek tapi pemandangannya worth it parah, sunrise-nya juara!",
     visitedAt: "2024-01-01T05:30:00.000Z",
+    latitude: -6.7868,
+    longitude: 106.9667,
+    imageUrl: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1170&auto=format&fit=crop",
   },
   {
     id: 3,
     title: "Kulineran di Bandung 🍜",
     description: "Cuanki, Batagor, Seblak... kenyang banget!",
     visitedAt: "2024-01-15T12:00:00.000Z",
+    latitude: -6.9175,
+    longitude: 107.6191,
+    imageUrl: "https://images.unsplash.com/photo-1628173491950-e2b2c938c5b9?q=80&w=1170&auto=format&fit=crop",
   },
 ];
 
@@ -60,7 +72,7 @@ export default function HomeScreen() {
   const fetchLogs = async () => {
     try {
       const response = await axios.get(API_URL);
-      
+
       // Jika data kosong (awal install), pakai dummy dulu
       if (response.data.length === 0) {
         setLogs(DUMMY_DATA);
@@ -110,15 +122,31 @@ export default function HomeScreen() {
           data={logs}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TravelCard
-              title={item.title}
-              description={item.description}
-              date={new Date(item.visitedAt).toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
+            <TouchableOpacity
+              onPress={() => router.push({
+                pathname: "/detail/[id]",
+                params: {
+                  id: item.id,
+                  title: item.title,
+                  description: item.description || "",
+                  visitedAt: item.visitedAt,
+                  latitude: item.latitude || 0,
+                  longitude: item.longitude || 0,
+                  imageUrl: item.imageUrl || ""
+                }
               })}
-            />
+            >
+              <TravelCard
+                title={item.title}
+                description={item.description}
+                date={new Date(item.visitedAt).toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+                imageUrl={item.imageUrl}
+              />
+            </TouchableOpacity>
           )}
           contentContainerStyle={styles.listContent}
           refreshControl={
