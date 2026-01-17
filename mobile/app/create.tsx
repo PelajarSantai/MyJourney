@@ -21,6 +21,10 @@ export default function CreateLogScreen() {
   // IP Emulator Android (Ganti kalau pakai HP fisik)
   const API_URL = "http://10.0.2.2:3000/api/logs";
 
+  /**
+   * Membuka kamera menggunakan Expo ImagePicker.
+   * User perlu memberikan izin akses kamera.
+   */
   const pickImage = async () => {
     // 1. Minta Izin Kamera
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
