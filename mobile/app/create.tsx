@@ -116,21 +116,35 @@ export default function CreateLogScreen() {
         return;
       }
 
-      console.log("Izin lokasi aman!");
+      console.log("Mencoba mengambil lokasi...");
 
-      // 2. Ambil Koordinat
-      // Menggunakan accuracy balanced biar lebih cepat di emulator
-      let location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.Balanced,
-      });
-      setLocation(location);
-      console.log(location);
+      // 2. Strategi Bertingkat (Layered Strategy)
+      
+      // Tahap A: Coba ambil lokasi terakhir yang tersimpan (Cepat & Minim Error)
+      let location = await Location.getLastKnownPositionAsync({});
+      
+      // Tahap B: Jika tidak ada last known, baru minta Current Position (Beban GPS)
+      if (!location) {
+        location = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Balanced, // Balanced biar gak maksa GPS High Accuracy
+        });
+      }
+
+      // Jika berhasil dapat lokasi
+      if (location) {
+        setLocation(location);
+        console.log("Lokasi didapatkan:", location);
+      } else {
+        // Jika null juga, lempar ke catch
+        throw new Error("Lokasi tidak ditemukan");
+      }
+
     } catch (error) {
-      console.warn("Gagal ambil lokasi asli (menggunakan fallback):", error);
-      // alert("Gagal ambil lokasi asli. Menggunakan lokasi dummy (Jakarta) untuk testing! 📍");
-      alert("✅ Lokasi Testing Aktif: Jakarta Pusat (Fallback Mode)");
+      console.warn("Gagal ambil lokasi asli:", error);
+      
+      // Tahap C: Fallback Terakhir (Dummy Jakarta)
+      alert("⚠️ GPS tidak terdeteksi. Menggunakan lokasi Estimasi (Jakarta).");
 
-      // Fallback Location (Jakarta)
       setLocation({
         coords: {
           latitude: -6.2088,
