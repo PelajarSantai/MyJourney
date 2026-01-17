@@ -21,7 +21,10 @@ model TravelLog {
   createdAt   DateTime      @default(now()) // Kapan dicatat
   
   // Relasi: Satu catatan bisa punya banyak foto
+  // Relasi: Satu catatan bisa punya banyak foto
   photos      TravelPhoto[] 
+  
+  // Perlu dijalankan 'npx prisma db push' jika ada perubahan disini 
 }
 
 // Model Foto: Menyimpan link gambar
