@@ -127,7 +127,21 @@ export default function CreateLogScreen() {
       console.log(location);
     } catch (error) {
       console.error("Gagal ambil lokasi:", error);
-      alert("Gagal mengambil lokasi. Pastikan GPS aktif! 📍");
+      alert("Gagal ambil lokasi asli. Menggunakan lokasi dummy (Jakarta) untuk testing! 📍");
+
+      // Fallback Location (Jakarta)
+      setLocation({
+        coords: {
+          latitude: -6.2088,
+          longitude: 106.8456,
+          altitude: 0,
+          accuracy: 0,
+          altitudeAccuracy: 0,
+          heading: 0,
+          speed: 0,
+        },
+        timestamp: Date.now(),
+      });
     }
   };
 
