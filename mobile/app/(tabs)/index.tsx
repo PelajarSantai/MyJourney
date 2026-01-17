@@ -92,8 +92,8 @@ export default function HomeScreen() {
           }
           ListEmptyComponent={
             <View style={styles.center}>
-              <Text style={{ color: "#888", fontStyle: "italic" }}>
-                Belum ada riwayat, coba tambah dulu.
+              <Text style={{ color: "#aaa", fontSize: 16, marginTop: 20 }}>
+                Belum ada perjalanan nih, yuk jalan-jalan! 🚀
               </Text>
             </View>
           }
