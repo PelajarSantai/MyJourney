@@ -63,6 +63,8 @@ export default function HomeScreen() {
       setLogs(response.data);
     } catch (error) {
       console.error("Gagal ambil data:", error);
+      // Fallback ke data dummy jika API gagal/offline
+      setLogs(DUMMY_DATA);
     } finally {
       setLoading(false);
       setRefreshing(false);
