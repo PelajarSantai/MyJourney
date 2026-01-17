@@ -17,6 +17,16 @@ export default function CreateLogScreen() {
     }
 
     console.log("Izin kamera diberikan, siap meluncur!");
+
+    // 2. Buka Kamera
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.7,
+    });
+
+    console.log(result);
   };
 
   return (
