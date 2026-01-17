@@ -16,8 +16,28 @@ import { useRouter } from 'expo-router';
 
 // 3. Utilities
 import axios from 'axios';
+
+// 4. Constants
 // IP Emulator Android (Ganti kalau pakai HP fisik)
 const API_URL = "http://10.0.2.2:3000/api/logs";
+
+// Pesan-pesan dalam aplikasi
+const MESSAGES = {
+  validation: {
+    title: "Mohon isi judul catatanmu dulu ya! 📝",
+    description: "Ceritain sedikit tentang perjalananmu!",
+    image: "Wajib upload foto",
+    location: "Jangan lupa ambil lokasi, agar tau ini dimana!",
+  },
+};
+
+// Konfigurasi Kamera
+const CAMERA_OPTIONS: ImagePicker.ImagePickerOptions = {
+  mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  allowsEditing: true,
+  aspect: [4, 3],
+  quality: 0.7,
+};
 
 // Warna Tema (Supaya konsisten)
 const COLORS = {
@@ -67,12 +87,7 @@ export default function CreateLogScreen() {
     console.log("Izin kamera diberikan, siap meluncur!");
 
     // 2. Buka Kamera
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 0.7,
-    });
+    const result = await ImagePicker.launchCameraAsync(CAMERA_OPTIONS);
 
     console.log(result);
 
@@ -109,25 +124,25 @@ export default function CreateLogScreen() {
   const handleSubmit = async () => {
     // Validasi Judul
     if (!title) {
-      alert("Mohon isi judul catatanmu dulu ya! 📝");
+      alert(MESSAGES.validation.title);
       return;
     }
 
     // Validasi Deskripsi
     if (!description) {
-      alert("Ceritain sedikit tentang perjalananmu!");
+      alert(MESSAGES.validation.description);
       return;
     }
 
     // Validasi Foto
     if (!image) {
-      alert("Wajib upload foto");
+      alert(MESSAGES.validation.image);
       return;
     }
 
     // Validasi Lokasi
     if (!location) {
-      alert("Jangan lupa ambil lokasi, agar tau ini dimana!");
+      alert(MESSAGES.validation.location);
       return;
     }
 
