@@ -87,6 +87,12 @@ export default function CreateLogScreen() {
       return;
     }
 
+    // Validasi Deskripsi
+    if (!description) {
+      alert("Ceritain sedikit dong tentang perjalananmu! ✍️");
+      return;
+    }
+
     setLoading(true);
 
     try {
