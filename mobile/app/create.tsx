@@ -222,17 +222,17 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#666',
+    color: COLORS.textSecondary,
     marginBottom: 8,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.border,
     padding: 12,
     borderRadius: 8,
     fontSize: 16,
     marginBottom: 20,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: COLORS.inputBg,
     // Shadow (Bayangan)
     elevation: 2,
     shadowColor: '#000',
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: COLORS.primary,
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   buttonText: {
-    color: '#fff',
+    color: COLORS.white,
     fontSize: 16,
     fontWeight: 'bold',
   },
