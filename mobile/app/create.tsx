@@ -72,6 +72,10 @@ export default function CreateLogScreen() {
     console.log(location);
   };
 
+  /**
+   * Mengirim data log ke server via API.
+   * Menggunakan FormData untuk support upload file.
+   */
   const handleSubmit = async () => {
     if (!title || !description || !image || !location) {
       alert("Harap lengkapi semua data (Judul, Deskripsi, Foto, Lokasi)!");
