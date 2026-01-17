@@ -217,6 +217,7 @@ export default function CreateLogScreen() {
           onChangeText={setDescription}
           multiline
           numberOfLines={4}
+          autoCapitalize="sentences"
         />
       </View>
 
