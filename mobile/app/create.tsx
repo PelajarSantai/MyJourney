@@ -63,7 +63,31 @@ export default function CreateLogScreen() {
     }
 
     setLoading(true);
-    // Nanti logika kirim data di sini
+
+    try {
+      // 1. Siapkan data form
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('visitedAt', new Date().toISOString());
+      
+      // Kirim file gambar
+      // @ts-ignore
+      formData.append('image', {
+        uri: image,
+        name: 'photo.jpg',
+        type: 'image/jpeg',
+      });
+
+      // Nanti kirim ke axios di sini
+      console.log("Data siap dikirim!");
+
+    } catch (error) {
+      console.error(error);
+      alert("Gagal menyimpan data!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
