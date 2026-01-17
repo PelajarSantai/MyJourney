@@ -99,6 +99,12 @@ export default function CreateLogScreen() {
       return;
     }
 
+    // Validasi Lokasi
+    if (!location) {
+      alert("Jangan lupa ambil lokasi ya, biar tau ini dimana! 📍");
+      return;
+    }
+
     setLoading(true);
 
     try {
