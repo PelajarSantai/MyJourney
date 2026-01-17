@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../../../lib/prisma";
 import { writeFile } from "fs/promises";
 import path from "path";
-
-const prisma = new PrismaClient();
 
 // 1. FUNGSI GET (Untuk HP mengambil data)
 export async function GET() {
@@ -23,7 +21,7 @@ export async function POST(request: Request) {
   try {
     // Membaca data form (multipart/form-data)
     const formData = await request.formData();
-    
+
     // Ambil data teks
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
@@ -44,7 +42,7 @@ export async function POST(request: Request) {
       const buffer = Buffer.from(await file.arrayBuffer());
       // Buat nama file unik (contoh: 173456789-kucing.jpg)
       const filename = Date.now() + "-" + file.name.replaceAll(" ", "_");
-      
+
       // Simpan ke folder public/uploads
       await writeFile(
         path.join(process.cwd(), "public/uploads", filename),
