@@ -4,6 +4,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
+
+export default function CreateLogScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<string | null>(null);
