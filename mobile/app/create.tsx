@@ -174,15 +174,17 @@ export default function CreateLogScreen() {
       </View>
 
       <Text style={styles.label}>Deskripsi</Text>
-      <TextInput
-        style={[styles.input, styles.textArea]}
-        placeholder="Ceritakan pengalamanmu..."
-        value={description}
-        onChangeText={setDescription}
-        multiline
-        numberOfLines={4}
-        textAlignVertical="top"
-      />
+      <View style={[styles.inputContainer, { height: 120, alignItems: 'flex-start', paddingVertical: 12 }]}>
+        <Ionicons name="document-text-outline" size={20} color={COLORS.textSecondary} style={styles.icon} />
+        <TextInput
+          style={[styles.inputFlex, { height: '100%', textAlignVertical: 'top' }]}
+          placeholder="Ceritakan pengalamanmu..."
+          value={description}
+          onChangeText={setDescription}
+          multiline
+          numberOfLines={4}
+        />
+      </View>
 
       <TouchableOpacity style={styles.secondaryButton} onPress={getLocation}>
         <Text style={styles.secondaryButtonText}>📍 Ambil Lokasi</Text>
