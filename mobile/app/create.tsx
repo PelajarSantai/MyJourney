@@ -163,12 +163,15 @@ export default function CreateLogScreen() {
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
 
       <Text style={styles.label}>Judul Log</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Contoh: Perjalanan ke Bandung..."
-        value={title}
-        onChangeText={setTitle}
-      />
+      <View style={styles.inputContainer}>
+        <Ionicons name="create-outline" size={20} color={COLORS.textSecondary} style={styles.icon} />
+        <TextInput
+          style={styles.inputFlex}
+          placeholder="Contoh: Perjalanan ke Bandung..."
+          value={title}
+          onChangeText={setTitle}
+        />
+      </View>
 
       <Text style={styles.label}>Deskripsi</Text>
       <TextInput
@@ -225,6 +228,29 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.textSecondary,
     marginBottom: 8,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    marginBottom: 20,
+    backgroundColor: COLORS.inputBg,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  icon: {
+    marginRight: 10,
+  },
+  inputFlex: {
+    flex: 1,
+    paddingVertical: 12,
+    fontSize: 16,
   },
   input: {
     borderWidth: 1,
