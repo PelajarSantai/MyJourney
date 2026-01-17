@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 export default function CreateLogScreen() {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
@@ -13,6 +14,17 @@ export default function CreateLogScreen() {
         placeholder="Contoh: Perjalanan ke Bandung..."
         value={title}
         onChangeText={setTitle}
+      />
+
+      <Text style={styles.label}>Deskripsi</Text>
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Ceritakan pengalamanmu..."
+        value={description}
+        onChangeText={setDescription}
+        multiline
+        numberOfLines={4}
+        textAlignVertical="top"
       />
     </View>
   );
@@ -44,5 +56,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
     backgroundColor: '#f9f9f9',
+  },
+  textArea: {
+    height: 100,
   },
 });
