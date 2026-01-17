@@ -56,6 +56,10 @@ export default function CreateLogScreen() {
         textAlignVertical="top"
       />
 
+      <TouchableOpacity style={styles.secondaryButton} onPress={() => alert("Ambil Lokasi")}>
+        <Text style={styles.secondaryButtonText}>📍 Ambil Lokasi</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.secondaryButton} onPress={pickImage}>
         <Text style={styles.secondaryButtonText}>📸 Ambil Foto</Text>
       </TouchableOpacity>
