@@ -250,16 +250,16 @@ export default function CreateLogScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.background,
     flex: 1,
     padding: 20,
-    backgroundColor: COLORS.background,
   },
   title: {
+    color: COLORS.text,
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 40,
-    color: COLORS.text,
   },
   label: {
     fontSize: 16,
