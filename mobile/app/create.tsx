@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 
 export default function CreateLogScreen() {
@@ -26,6 +26,10 @@ export default function CreateLogScreen() {
         numberOfLines={4}
         textAlignVertical="top"
       />
+
+      <TouchableOpacity style={styles.button} onPress={() => alert('Simpan!')}>
+        <Text style={styles.buttonText}>Simpan Catatan</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -59,5 +63,17 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 100,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
