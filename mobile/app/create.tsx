@@ -254,24 +254,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 16,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    padding: 12,
-    borderRadius: 8,
-    fontSize: 16,
-    marginBottom: 20,
-    backgroundColor: COLORS.inputBg,
-    // Shadow (Bayangan)
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-  },
-  textArea: {
-    height: 100,
-  },
   button: {
     backgroundColor: COLORS.primary,
     padding: 15,
