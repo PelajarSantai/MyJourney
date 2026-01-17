@@ -60,7 +60,13 @@ export default function HomeScreen() {
   const fetchLogs = async () => {
     try {
       const response = await axios.get(API_URL);
-      setLogs(response.data);
+      
+      // Jika data kosong (awal install), pakai dummy dulu
+      if (response.data.length === 0) {
+        setLogs(DUMMY_DATA);
+      } else {
+        setLogs(response.data);
+      }
     } catch (error) {
       console.error("Gagal ambil data:", error);
       // Fallback ke data dummy jika API gagal/offline
