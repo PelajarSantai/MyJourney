@@ -1,3 +1,9 @@
+/**
+ * Halaman Buat Catatan (Create Log)
+ * Dibuat oleh: Member 2
+ * Fitur: Form Input, Kamera, Lokasi, API Post
+ */
+
 // 1. React & React Native
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
