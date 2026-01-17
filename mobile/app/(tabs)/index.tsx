@@ -54,25 +54,7 @@ export default function HomeScreen() {
     fetchLogs();
   }, []);
 
-  const renderItem = ({ item }: { item: TravelLog }) => (
-    <View style={styles.card}>
-      <View style={styles.headerCard}>
-        <Text style={styles.title}>{item.title}</Text>
-        {/* tanggal ditampilkan dalam format lokal (id-ID) agar lebih mudah dibaca */}
-        <Text style={styles.date}>
-          {new Date(item.visitedAt).toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          })}
-        </Text>
-      </View>
 
-      <Text style={styles.description}>
-        {item.description || "Tidak ada deskripsi"}
-      </Text>
-    </View>
-  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -145,33 +127,7 @@ const styles = StyleSheet.create({
   listContent: {
     padding: 16,
   },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    elevation: 2,
-  },
-  headerCard: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
-    flex: 1,
-  },
-  date: {
-    fontSize: 12,
-    color: "#999",
-    marginTop: 2,
-  },
-  description: {
-    fontSize: 14,
-    color: "#444",
-  },
+
   center: {
     flex: 1,
     justifyContent: "center",
