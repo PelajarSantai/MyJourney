@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import * as Location from 'expo-location';
 
 export default function CreateLogScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<string | null>(null);
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
 
   const pickImage = async () => {
     // 1. Minta Izin Kamera
