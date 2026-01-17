@@ -199,6 +199,7 @@ export default function CreateLogScreen() {
         <TextInput
           style={styles.inputFlex}
           placeholder="Contoh: Perjalanan ke Bandung..."
+          placeholderTextColor={COLORS.textSecondary}
           value={title}
           onChangeText={setTitle}
         />
