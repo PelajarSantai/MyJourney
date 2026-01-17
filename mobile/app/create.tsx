@@ -25,6 +25,19 @@ export default function CreateLogScreen() {
   // IP Emulator Android (Ganti kalau pakai HP fisik)
   const API_URL = "http://10.0.2.2:3000/api/logs";
 
+  // Warna Tema (Supaya konsisten)
+  const COLORS = {
+    primary: '#007AFF',
+    secondary: '#e1f0ff',
+    background: '#fff',
+    text: '#333',
+    textSecondary: '#666',
+    border: '#ddd',
+    inputBg: '#f9f9f9',
+    white: '#fff',
+    black: '#000',
+  };
+
   /**
    * Membuka kamera menggunakan Expo ImagePicker.
    * User perlu memberikan izin akses kamera.
@@ -89,19 +102,19 @@ export default function CreateLogScreen() {
 
     // Validasi Deskripsi
     if (!description) {
-      alert("Ceritain sedikit dong tentang perjalananmu! ✍️");
+      alert("Ceritain sedikit tentang perjalananmu!");
       return;
     }
 
     // Validasi Foto
     if (!image) {
-      alert("Wajib upload foto kenangan ya! 📸");
+      alert("Wajib upload foto");
       return;
     }
 
     // Validasi Lokasi
     if (!location) {
-      alert("Jangan lupa ambil lokasi ya, biar tau ini dimana! 📍");
+      alert("Jangan lupa ambil lokasi, agar tau ini dimana!");
       return;
     }
 
