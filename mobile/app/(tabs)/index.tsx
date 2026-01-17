@@ -8,8 +8,11 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import TravelCard from "../../components/TravelCard";
 
 // Struktur data mengikuti payload API logs saat ini
