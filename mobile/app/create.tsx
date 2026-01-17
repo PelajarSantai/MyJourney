@@ -1,13 +1,15 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
-
-export default function CreateLogScreen() {
+import axios from 'axios';
+import { useRouter } from 'expo-router';
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const pickImage = async () => {
     // 1. Minta Izin Kamera
