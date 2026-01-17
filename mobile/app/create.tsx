@@ -202,6 +202,7 @@ export default function CreateLogScreen() {
           placeholderTextColor={COLORS.textSecondary}
           value={title}
           onChangeText={setTitle}
+          autoCapitalize="sentences"
         />
       </View>
 
