@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function CreateLogScreen() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState<string | null>(null);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Buat Catatan Baru 📝</Text>
