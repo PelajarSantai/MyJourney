@@ -29,6 +29,12 @@ const MESSAGES = {
     image: "Wajib upload foto",
     location: "Jangan lupa ambil lokasi, agar tau ini dimana!",
   },
+  system: {
+    cameraPermission: 'Maaf, kami butuh izin akses kamera untuk fitur ini!',
+    locationPermission: 'Izin lokasi ditolak! Tidak bisa mengambil koordinat.',
+    success: 'Catatan berhasil disimpan! 🎉',
+    error: 'Gagal menyimpan data!',
+  },
 };
 
 // Konfigurasi Kamera
@@ -80,7 +86,7 @@ export default function CreateLogScreen() {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     
     if (status !== 'granted') {
-      alert('Maaf, kami butuh izin akses kamera untuk fitur ini!');
+      alert(MESSAGES.system.cameraPermission);
       return;
     }
 
@@ -105,7 +111,7 @@ export default function CreateLogScreen() {
     let { status } = await Location.requestForegroundPermissionsAsync();
     
     if (status !== 'granted') {
-      alert('Izin lokasi ditolak! Tidak bisa mengambil koordinat.');
+      alert(MESSAGES.system.locationPermission);
       return;
     }
 
@@ -172,12 +178,12 @@ export default function CreateLogScreen() {
 
       console.log("Data berhasil dikirim!");
       
-      alert("Catatan berhasil disimpan! 🎉");
+      alert(MESSAGES.system.success);
       router.back(); // Kembali ke home
       
     } catch (error) {
       console.error(error);
-      alert("Gagal menyimpan data!");
+      alert(MESSAGES.system.error);
     } finally {
       setLoading(false);
     }
