@@ -93,16 +93,25 @@ export default function HomeScreen() {
         <FlatList
           data={logs}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <TravelCard
+              title={item.title}
+              description={item.description}
+              date={new Date(item.visitedAt).toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            />
+          )}
           contentContainerStyle={styles.listContent}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          // Menampilkan pesan informatif jika belum ada data riwayat
           ListEmptyComponent={
             <View style={styles.center}>
               <Text style={{ color: "#888", fontStyle: "italic" }}>
-                Belum ada riwayat perjalanan.
+                Belum ada riwayat, coba tambah dulu.
               </Text>
             </View>
           }
