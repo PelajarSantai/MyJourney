@@ -211,6 +211,7 @@ export default function CreateLogScreen() {
         <TextInput
           style={[styles.inputFlex, { height: '100%', textAlignVertical: 'top' }]}
           placeholder="Ceritakan pengalamanmu..."
+          placeholderTextColor={COLORS.textSecondary}
           value={description}
           onChangeText={setDescription}
           multiline
