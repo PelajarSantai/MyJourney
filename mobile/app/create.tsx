@@ -24,7 +24,7 @@ const API_URL = "http://10.0.2.2:3000/api/logs";
 // Pesan-pesan dalam aplikasi
 const MESSAGES = {
   validation: {
-    title: "Mohon isi judul catatanmu dulu ya! 📝",
+    title: "Mohon isi judul catatanmu dulu ya!",
     description: "Ceritain sedikit tentang perjalananmu!",
     image: "Wajib upload foto",
     location: "Jangan lupa ambil lokasi, agar tau ini dimana!",
@@ -32,7 +32,7 @@ const MESSAGES = {
   system: {
     cameraPermission: 'Maaf, kami butuh izin akses kamera untuk fitur ini!',
     locationPermission: 'Izin lokasi ditolak! Tidak bisa mengambil koordinat.',
-    success: 'Catatan berhasil disimpan! 🎉',
+    success: 'Catatan berhasil disimpan!',
     error: 'Gagal menyimpan data!',
   },
 };
@@ -290,12 +290,12 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   button: {
-    backgroundColor: COLORS.primary,
-    padding: 15,
-    borderRadius: 8,
     alignItems: 'center',
-    marginTop: 20,
+    backgroundColor: COLORS.primary,
+    borderRadius: 8,
     elevation: 3,
+    marginTop: 20,
+    padding: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -307,15 +307,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   secondaryButton: {
-    backgroundColor: COLORS.secondary,
-    padding: 15,
-    borderRadius: 8,
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 10,
-    borderWidth: 1,
+    backgroundColor: COLORS.secondary,
     borderColor: COLORS.primary,
+    borderRadius: 8,
+    borderWidth: 1,
     elevation: 2,
+    marginBottom: 10,
+    marginTop: 10,
+    padding: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
@@ -327,15 +327,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imagePreview: {
-    width: '100%',
-    height: 200,
     borderRadius: 8,
+    height: 200,
     marginBottom: 20,
     resizeMode: 'cover',
+    width: '100%',
   },
   locationText: {
-    marginBottom: 10,
     color: '#666',
+    marginBottom: 10,
     textAlign: 'center',
   },
 });
