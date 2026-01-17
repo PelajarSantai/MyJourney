@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import TravelCard from "../../components/TravelCard";
 
@@ -89,10 +89,12 @@ export default function HomeScreen() {
     }
   };
 
-  // fetch pertama kali saat screen dirender
-  useEffect(() => {
-    fetchLogs();
-  }, []);
+  // Auto refresh saat layar fokus (kembali dari create)
+  useFocusEffect(
+    useCallback(() => {
+      fetchLogs();
+    }, [])
+  );
 
   // handler refresh dari gesture pull-down
   const onRefresh = useCallback(() => {
@@ -166,7 +168,7 @@ export default function HomeScreen() {
       {/* Tombol Melayang (FAB) buat nambah catatan */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => router.push("/create")}
+        onPress={() => router.push("/modal")}
       >
         <Ionicons name="add" size={30} color="#fff" />
       </TouchableOpacity>
