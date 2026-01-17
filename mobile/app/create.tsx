@@ -8,8 +8,15 @@ export default function CreateLogScreen() {
   const [image, setImage] = useState<string | null>(null);
 
   const pickImage = async () => {
-    // Nanti logika kamera di sini
-    console.log("Tombol kamera ditekan!");
+    // 1. Minta Izin Kamera
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    
+    if (status !== 'granted') {
+      alert('Maaf, kami butuh izin akses kamera untuk fitur ini!');
+      return;
+    }
+
+    console.log("Izin kamera diberikan, siap meluncur!");
   };
 
   return (
