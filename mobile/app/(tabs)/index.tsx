@@ -61,7 +61,7 @@ export default function HomeScreen() {
       <StatusBar barStyle="dark-content" />
 
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>MyJourney ✈️</Text>
+        <Text style={styles.headerTitle}>My Travel Journal 🌍</Text>
         <Text style={styles.headerSubtitle}>Rekam jejak petualanganmu</Text>
       </View>
 
