@@ -8,13 +8,14 @@ import { useRouter } from 'expo-router';
 export default function CreateLogScreen() {
   // Tipe data custom
   type LocationState = Location.LocationObject | null;
+  type ImageState = string | null;
 
   // State untuk menyimpan input form
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   
   // State untuk data multimedia (foto & lokasi)
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<ImageState>(null);
   const [location, setLocation] = useState<LocationState>(null);
   
   // State UI
