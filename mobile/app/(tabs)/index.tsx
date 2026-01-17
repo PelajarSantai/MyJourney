@@ -10,6 +10,7 @@ import {
   RefreshControl,
 } from "react-native";
 import axios from "axios";
+import TravelCard from "../../components/TravelCard";
 
 // Struktur data mengikuti payload API logs saat ini
 interface TravelLog {
