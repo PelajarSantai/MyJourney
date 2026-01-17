@@ -16,7 +16,6 @@ import { useRouter } from 'expo-router';
 
 // 3. Utilities
 import axios from 'axios';
-
 // IP Emulator Android (Ganti kalau pakai HP fisik)
 const API_URL = "http://10.0.2.2:3000/api/logs";
 
