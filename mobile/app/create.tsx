@@ -36,8 +36,15 @@ export default function CreateLogScreen() {
   };
 
   const getLocation = async () => {
-    // Nanti logika GPS di sini
-    console.log("Tombol lokasi ditekan!");
+    // 1. Minta Izin Lokasi
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    
+    if (status !== 'granted') {
+      alert('Izin lokasi ditolak! Tidak bisa mengambil koordinat.');
+      return;
+    }
+
+    console.log("Izin lokasi aman!");
   };
 
   return (
